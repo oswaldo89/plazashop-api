@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -35,7 +36,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $parent = new Product($request->all());
+
+        if ($parent->save()){
+            $result['status'] = true;
+            $result['message'] = 'Agregado correctamente.';
+        }else{
+            $result['status'] = false;
+            $result['message'] = 'Ocurrio un error, no se pudo guardar.';
+        }
+
+        return response()->json($result);
     }
 
     /**
