@@ -19,17 +19,6 @@ class AuthController extends Controller
             return response()->json(['error'=> 'el usuario ya existe'], 422);
         }
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'confirm_password' => 'required|same:password',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['error'=>$validator->errors()], 422);
-        }
-
         $input = $request->all();
         $input['password'] = bcrypt($request->get('password'));
         $user = User::create($input);
