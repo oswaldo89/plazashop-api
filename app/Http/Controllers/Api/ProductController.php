@@ -67,7 +67,7 @@ class ProductController extends Controller
      Obtains pagination from the products
      **/
     public function getList($total){
-        $products = Product::skip($total)->take(10)->get();
+        $products = Product::skip($total)->take(10)->orderBy('created_at', 'desc')->get();
         return response()->json($products);
     }
 }
