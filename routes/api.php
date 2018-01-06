@@ -9,5 +9,6 @@ Route::post('login', 'Api\AuthController@login');
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', 'Api\AuthController@profile');
     Route::resource('product', 'Api\ProductController');
-    Route::get('/product_list/{total}', 'Api\ProductController@getList');
 });
+//url abierta al publico
+Route::get('/product_list/{total}', 'Api\ProductController@getList');
