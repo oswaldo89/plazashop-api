@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Product;
+use App\ProductsPhoto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,9 +17,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $parent = new Product($request->all());
+        $product = new Product($request->all());
+        
+        if ($product->save()){
 
-        if ($parent->save()){
+            //Guarda imagenes
+            foreach ($request->image as $photo) {
+                $filename = $photo->store('photos');
+                ProductsPhoto::create([
+                    'product_id' => $product->id,
+                    'filename' => $filename
+                ]);
+            }
+
             $result['status'] = true;
             $result['message'] = 'Agregado correctamente.';
         }else{
