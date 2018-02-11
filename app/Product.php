@@ -13,4 +13,9 @@ class Product extends Model
         'local',
         'descripcion'
     ];
+
+    public function photos()
+    {
+        return $this->hasMany('App\ProductsPhoto');
+    }
 }

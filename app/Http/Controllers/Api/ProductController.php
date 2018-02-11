@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product($request->all());
-        
+
         if ($product->save()){
 
             //Guarda imagenes
@@ -78,7 +78,7 @@ class ProductController extends Controller
      Obtains pagination from the products
      **/
     public function getList($total){
-        $products = Product::skip($total)->take(10)->orderBy('created_at', 'desc')->get();
+        $products = Product::skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
         return response()->json($products);
     }
 }
