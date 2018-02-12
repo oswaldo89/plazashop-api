@@ -14,6 +14,6 @@ class WelcomeMail extends Mailable
     }
     public function build()
     {
-        return $this->view('registration');
+        return $this->view('registration')->subject('Bienvenido!');
     }
 }
