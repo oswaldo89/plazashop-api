@@ -7,7 +7,7 @@
 <body>
 <h2>Bienvenido a PlazaShop</h2>
 <br/>
-    EL correo registrado es {{$user['email']}}
+    El correo registrado es {{ $user['email'] }}, y tu codigo de registro es el siguiente {{ $user['confirmation_code'] }}
 </body>
 
 </html>
