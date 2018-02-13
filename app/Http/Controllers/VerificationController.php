@@ -22,7 +22,7 @@ class VerificationController extends Controller
             $user->confirmation_code = null;
             $user->save();
             $response['status'] = true;
-            $response['user'] = $user->ceoName;
+            $response['user'] = $user->name;
             $response['message'] = "Su cuenta se ha validado correctamente, ahora puede iniciar sesión.";
             return view('confirmation', compact('response'));
         }
