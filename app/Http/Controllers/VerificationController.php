@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class VerificationController extends Controller
@@ -15,7 +16,7 @@ class VerificationController extends Controller
         if (!$user)
         {
             $response['message'] = "Lo sentimos pero no se pudo validar su cuenta.";
-            return view('pages.confirmation_code', compact('response'));
+            return view('confirmation', compact('response'));
         }else{
             $user->confirmed = 1;
             $user->confirmation_code = null;
@@ -23,7 +24,7 @@ class VerificationController extends Controller
             $response['status'] = true;
             $response['user'] = $user->ceoName;
             $response['message'] = "Su cuenta se ha validado correctamente, ahora puede iniciar sesión.";
-            return view('pages.confirmation_code', compact('response'));
+            return view('confirmation', compact('response'));
         }
     }
 }
