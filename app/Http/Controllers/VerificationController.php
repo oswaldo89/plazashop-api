@@ -23,7 +23,7 @@ class VerificationController extends Controller
             $user->save();
             $response['status'] = true;
             $response['user'] = $user->name;
-            $response['message'] = "Su cuenta se ha validado correctamente, ahora puede iniciar sesión.";
+            $response['message'] = "Su cuenta se ha validado correctamente, ahora puede iniciar sesión en la aplicación. puede cerrar esta pantalla.";
             return view('confirmation', compact('response'));
         }
     }
