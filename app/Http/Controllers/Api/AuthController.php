@@ -26,6 +26,7 @@ class AuthController extends Controller
         $input['password'] = bcrypt($request->get('password'));
         $user = User::create($input);
         $token =  $user->createToken('MyApp')->accessToken;
+        print_r($user);
 
         Mail::to($user['email'])->send(new WelcomeMail($user));
 
