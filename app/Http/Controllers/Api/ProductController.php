@@ -6,6 +6,7 @@ use App\Product;
 use App\ProductsPhoto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -18,6 +19,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product($request->all());
+        $product->user_id = Auth::user()->id;
 
         if ($product->save()){
 
