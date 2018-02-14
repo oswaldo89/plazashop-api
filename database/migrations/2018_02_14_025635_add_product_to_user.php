@@ -13,7 +13,7 @@ class AddProductToUser extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             $table->integer('user_id');
         });
     }
