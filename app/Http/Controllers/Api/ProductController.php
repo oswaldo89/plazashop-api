@@ -43,17 +43,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -80,7 +69,7 @@ class ProductController extends Controller
      Obtains pagination from the products
      **/
     public function getList($total){
-        $products = Product::skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
+        $products = Product::where('activo',1)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
         return response()->json($products);
     }
 }

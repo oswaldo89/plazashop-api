@@ -11,7 +11,8 @@ class Product extends Model
         'precio',
         'categoriaId',
         'local',
-        'descripcion'
+        'descripcion',
+        'user_id'
     ];
 
     public function photos()
