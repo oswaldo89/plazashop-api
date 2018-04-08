@@ -13,7 +13,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -21,7 +21,7 @@ class ProductController extends Controller
         $product = new Product($request->all());
         $product->user_id = Auth::user()->id;
 
-        if ($product->save()){
+        if ($product->save()) {
 
             //Guarda imagenes
             foreach ($request->image as $photo) {
@@ -34,7 +34,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Agregado correctamente.';
-        }else{
+        } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo guardar.';
         }
@@ -45,8 +45,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -57,7 +57,7 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -66,10 +66,18 @@ class ProductController extends Controller
     }
 
     /**
-     Obtains pagination from the products
+     * Obtains pagination from the products
      **/
-    public function getList($total){
-        $products = Product::where('activo',1)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
+    public function getList($total)
+    {
+        $products = Product::where('activo', 1)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
+        return response()->json($products);
+    }
+
+    /* Obtain products from user_id */
+    public function getListByUser($total, $user_id)
+    {
+        $products = Product::where('activo', 1)->where("user_id", $user_id)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
         return response()->json($products);
     }
 }
