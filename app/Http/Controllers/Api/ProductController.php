@@ -42,6 +42,12 @@ class ProductController extends Controller
         return response()->json($result);
     }
 
+    public function edit($id)
+    {
+        $product = Product::where('id', $id)->with('photos')->get();
+        return response()->json($product);
+    }
+
     /**
      * Update the specified resource in storage.
      *
