@@ -27,7 +27,7 @@ class AuthController extends Controller
         $user = User::create($input);
         $token = $user->createToken('MyApp')->accessToken;
 
-        Mail::to($user['email'])->send(new WelcomeMail($user));
+        //Mail::to($user['email'])->send(new WelcomeMail($user));
 
         return response()->json([
             'token' => $token,
