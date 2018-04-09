@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         $productRequest = new Product($request->all());
         $product = Product::find($id);
-        return response()->json($product);
+
 
 
         $product->id = $id;
@@ -62,8 +62,9 @@ class ProductController extends Controller
         $product->categoriaId = $productRequest->categoriaId;
         $product->local = $productRequest->local;
         $product->descripcion = $productRequest->descripcion;
+        return response()->json($product);
 
-        if ($product->save()) {
+        if ($product->update()) {
 
             //Guarda imagenes
             foreach ($request->image as $photo) {
