@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         $productRequest = new Product($request->all());
         $product = Product::where("id", $id);
-        $product->id = $productRequest->id;
+        $product->id = $id;
         $product->nombre = $productRequest->nombre;
         $product->precio = $productRequest->precio;
         $product->categoriaId = $productRequest->categoriaId;
