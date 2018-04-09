@@ -49,12 +49,9 @@ class ProductController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updateProduct(Request $request)
     {
-        $productRequest = new Product($request->all());
-
-        $product = Product::find($id);
-        $product->id = $id;
+        $product = Product::find($request->id);
         $product->nombre = $request->nombre;
         $product->precio = $request->precio;
         $product->categoriaId = $request->categoriaId;
@@ -62,7 +59,7 @@ class ProductController extends Controller
         $product->descripcion = $request->descripcion;
 
 
-        return response()->json($productRequest);
+        return response()->json($product);
         if ($product->update()) {
 
             //Guarda imagenes
