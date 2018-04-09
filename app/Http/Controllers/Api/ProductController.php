@@ -60,7 +60,7 @@ class ProductController extends Controller
         $product->local = $productRequest->local;
         $product->descripcion = $productRequest->descripcion;
 
-        print_r($product);
+        return response()->json($product);
 
 
         if ($product->update()) {
