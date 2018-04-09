@@ -42,12 +42,6 @@ class ProductController extends Controller
         return response()->json($result);
     }
 
-    public function edit($id)
-    {
-        $product = Product::where('id', $id)->with('photos')->get();
-        return response()->json($product);
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -57,7 +51,35 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $productRequest = new Product($request->all());
+        $product = Product::where("id", $id);
+        $product->id = $productRequest->id;
+        $product->nombre = $productRequest->nombre;
+        $product->precio = $productRequest->precio;
+        $product->categoriaId = $productRequest->categoriaId;
+        $product->local = $productRequest->local;
+        $product->descripcion = $productRequest->descripcion;
+
+
+        if ($product->update()) {
+
+            //Guarda imagenes
+            foreach ($request->image as $photo) {
+                $filename = $photo->store('photos');
+                ProductsPhoto::create([
+                    'product_id' => $product->id,
+                    'filename' => $filename
+                ]);
+            }
+
+            $result['status'] = true;
+            $result['message'] = 'Modificado correctamente.';
+        } else {
+            $result['status'] = false;
+            $result['message'] = 'Ocurrio un error, no se pudo modificar.';
+        }
+
+        return response()->json($result);
     }
 
     /**
