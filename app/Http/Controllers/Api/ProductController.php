@@ -51,15 +51,12 @@ class ProductController extends Controller
      */
     public function updateProduct(Request $request)
     {
-        return response()->json($request);
         $product = Product::find($request->id);
         $product->nombre = $request->nombre;
         $product->precio = $request->precio;
         $product->categoriaId = $request->categoriaId;
         $product->local = $request->local;
         $product->descripcion = $request->descripcion;
-
-
 
         if ($product->update()) {
 
