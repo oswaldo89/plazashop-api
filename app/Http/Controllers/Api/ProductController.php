@@ -57,6 +57,7 @@ class ProductController extends Controller
         $product->categoriaId = $request->categoriaId;
         $product->local = $request->local;
         $product->descripcion = $request->descripcion;
+        $product->activo = $request->activo;
 
         if ($product->update()) {
 
