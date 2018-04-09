@@ -11,6 +11,7 @@ class Product extends Model
         'precio',
         'categoriaId',
         'local',
+        'telephone',
         'descripcion',
         'user_id'
     ];

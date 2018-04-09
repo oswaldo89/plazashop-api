@@ -56,6 +56,7 @@ class ProductController extends Controller
         $product->precio = $request->precio;
         $product->categoriaId = $request->categoriaId;
         $product->local = $request->local;
+        $product->telephone = $request->telephone;
         $product->descripcion = $request->descripcion;
         $product->activo = $request->activo;
 
