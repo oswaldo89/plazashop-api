@@ -60,9 +60,6 @@ class ProductController extends Controller
         $product->local = $productRequest->local;
         $product->descripcion = $productRequest->descripcion;
 
-        return response()->json($product);
-
-
         if ($product->update()) {
 
             //Guarda imagenes
