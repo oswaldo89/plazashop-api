@@ -51,14 +51,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $productRequest = new Product($request->all());
+        //$productRequest = new Product($request->all());
         $product = Product::find($id);
         $product->id = $id;
-        $product->nombre = $productRequest->nombre;
-        $product->precio = $productRequest->precio;
-        $product->categoriaId = $productRequest->categoriaId;
-        $product->local = $productRequest->local;
-        $product->descripcion = $productRequest->descripcion;
+        $product->nombre = $request->nombre;
+        $product->precio = $request->precio;
+        $product->categoriaId = $request->categoriaId;
+        $product->local = $request->local;
+        $product->descripcion = $request->descripcion;
 
 
         return response()->json($product);
