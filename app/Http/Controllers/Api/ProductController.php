@@ -51,7 +51,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //$productRequest = new Product($request->all());
+        $productRequest = new Product($request->all());
+
         $product = Product::find($id);
         $product->id = $id;
         $product->nombre = $request->nombre;
@@ -61,7 +62,7 @@ class ProductController extends Controller
         $product->descripcion = $request->descripcion;
 
 
-        return response()->json($product);
+        return response()->json($productRequest);
         if ($product->update()) {
 
             //Guarda imagenes
