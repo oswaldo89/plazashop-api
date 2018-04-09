@@ -24,6 +24,7 @@ class AuthController extends Controller
         $input = $request->all();
         $input['confirmation_code'] = str_random(30);
         $input['password'] = bcrypt($request->get('password'));
+        $input['confirmed'] = true;
         $user = User::create($input);
         $token = $user->createToken('MyApp')->accessToken;
 
