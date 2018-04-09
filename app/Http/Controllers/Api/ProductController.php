@@ -53,16 +53,12 @@ class ProductController extends Controller
     {
         $productRequest = new Product($request->all());
         $product = Product::find($id);
-
-
-
         $product->id = $id;
         $product->nombre = $productRequest->nombre;
         $product->precio = $productRequest->precio;
         $product->categoriaId = $productRequest->categoriaId;
         $product->local = $productRequest->local;
         $product->descripcion = $productRequest->descripcion;
-        return response()->json($product);
 
         if ($product->update()) {
 
