@@ -52,7 +52,10 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $productRequest = new Product($request->all());
-        $product = Product::where("id", $id);
+        $product = Product::find($id);
+        return response()->json($product);
+
+
         $product->id = $id;
         $product->nombre = $productRequest->nombre;
         $product->precio = $productRequest->precio;
