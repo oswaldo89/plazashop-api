@@ -60,7 +60,7 @@ class ProductController extends Controller
         $product->local = $productRequest->local;
         $product->descripcion = $productRequest->descripcion;
 
-        if ($product->update()) {
+        if ($product->save()) {
 
             //Guarda imagenes
             foreach ($request->image as $photo) {
