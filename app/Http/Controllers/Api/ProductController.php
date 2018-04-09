@@ -63,12 +63,14 @@ class ProductController extends Controller
         if ($product->update()) {
 
             //Guarda imagenes
-            foreach ($request->image as $photo) {
-                $filename = $photo->store('photos');
-                ProductsPhoto::create([
-                    'product_id' => $product->id,
-                    'filename' => $filename
-                ]);
+            if($request->image != null){
+                foreach ($request->image as $photo) {
+                    $filename = $photo->store('photos');
+                    ProductsPhoto::create([
+                        'product_id' => $product->id,
+                        'filename' => $filename
+                    ]);
+                }
             }
 
             $result['status'] = true;
