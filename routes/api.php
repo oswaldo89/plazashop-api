@@ -10,7 +10,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('profile', 'Api\AuthController@profile');
     Route::resource('product', 'Api\ProductController');
     Route::get('/product_listByUser/{total}/{user_id}', 'Api\ProductController@getListByUser');
-    Route::post('/updatePet', 'Api\AuthController@updateProduct');
+    Route::post('/updatePet', 'Api\ProductController@updateProduct');
 });
 //url abierta al publico
 Route::get('/product_list/{total}', 'Api\ProductController@getList');
