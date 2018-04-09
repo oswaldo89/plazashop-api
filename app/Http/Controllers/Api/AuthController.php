@@ -45,12 +45,8 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
 
-            if ($user->confirmed == 1) {
-                $token = $user->createToken('MyApp')->accessToken;
-                return response()->json(['token' => $token, 'user' => $user], 200);
-            } else {
-                return response()->json(['error' => 'No ha verificado su correo electronico.'], 401);
-            }
+            $token = $user->createToken('MyApp')->accessToken;
+            return response()->json(['token' => $token, 'user' => $user], 200);
 
         } else {
             return response()->json(['error' => 'Usuario no autorizado'], 401);
