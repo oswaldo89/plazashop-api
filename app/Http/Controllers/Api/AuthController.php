@@ -58,4 +58,18 @@ class AuthController extends Controller
         $user = Auth::user();
         return response()->json(compact('user'), 200);
     }
+
+    public function saveFirebaseToken(Request $request)
+    {
+        $firebase_token = $request->get('firebase_token');
+        $user_id = $request->get('user_id');
+
+        $user = User::find($user_id);
+        $user->firebase_token = $firebase_token;
+        if ($user->update()) {
+            return response()->json(['message' => "ok"], 200);
+        } else {
+            return response()->json(['message' => "error"], 401);
+        }
+    }
 }
