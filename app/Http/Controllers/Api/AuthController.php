@@ -25,6 +25,7 @@ class AuthController extends Controller
         $input['confirmation_code'] = str_random(30);
         $input['password'] = bcrypt($request->get('password'));
         $input['confirmed'] = 1;
+        $input['firebase_token'] = "";
         $user = User::create($input);
         $token = $user->createToken('MyApp')->accessToken;
 
