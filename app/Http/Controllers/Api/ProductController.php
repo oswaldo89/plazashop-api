@@ -19,6 +19,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product($request->all());
+        $product->telephone = "";
         $product->user_id = Auth::user()->id;
 
         if ($product->save()) {
