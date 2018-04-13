@@ -14,7 +14,7 @@ class AddFirebaseToken extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('firebase_token');
+            $table->string('firebase_token')->default("");
         });
     }
 }
