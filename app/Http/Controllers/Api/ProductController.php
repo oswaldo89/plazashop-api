@@ -104,6 +104,19 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
+    /** Delete image **/
+    public function deleteImage($id){
+        $photo = ProductsPhoto::find($id);
+        if($photo->delete()){
+            $result['status'] = true;
+            $result['message'] = 'Eliminada correctamente.';
+        }else{
+            $result['status'] = false;
+            $result['message'] = 'Ocurrio un error inesperado.';
+        }
+        return response()->json($result);
+    }
+
     /* Obtain products from user_id */
     public function getListByUser($total, $user_id)
     {
