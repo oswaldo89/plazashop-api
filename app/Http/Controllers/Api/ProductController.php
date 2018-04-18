@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product($request->all());
-        $product->telephone = "";
+        $product->telephone = strlen($request->telephone) > 0 ? $request->telephone : "";
         $product->user_id = Auth::user()->id;
 
         if ($product->save()) {
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $product->precio = $request->precio;
         $product->categoriaId = $request->categoriaId;
         $product->local = $request->local;
-        $product->telephone = $request->telephone;
+        $product->telephone = strlen($request->telephone) > 0 ? $request->telephone : "";
         $product->descripcion = $request->descripcion;
         $product->activo = $request->activo;
 
