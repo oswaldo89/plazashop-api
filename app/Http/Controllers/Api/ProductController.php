@@ -141,6 +141,7 @@ class ProductController extends Controller
 
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
             ->withData( $post_data )
+            ->asJson()
             ->withHeader('Content-Type: application/json')
             ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
             ->post();
