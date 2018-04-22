@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Product;
 use App\ProductsPhoto;
+use App\User;
+use App\UserTopic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -65,7 +67,7 @@ class ProductController extends Controller
         if ($product->update()) {
 
             //Guarda imagenes
-            if($request->image != null){
+            if ($request->image != null) {
                 foreach ($request->image as $photo) {
                     $filename = $photo->store('photos');
                     ProductsPhoto::create([
@@ -106,12 +108,13 @@ class ProductController extends Controller
     }
 
     /** Delete image **/
-    public function deleteImage($id){
+    public function deleteImage($id)
+    {
         $photo = ProductsPhoto::find($id);
-        if($photo->delete()){
+        if ($photo->delete()) {
             $result['status'] = true;
             $result['message'] = 'Eliminada correctamente.';
-        }else{
+        } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error inesperado.';
         }
@@ -126,26 +129,73 @@ class ProductController extends Controller
     }
 
     /* sendMessage */
-    public function  sendMessage(){
-        // Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
+    /**
+     * @param Request $request
+     */
+    public function sendMessage(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $buyer_id = $request->buyer_id;
+        $product = Product::where("id", $request->pet_id)->first();
+
+        //si el dueño del producto es el que esta en session envia la burbuja a la derecha
+        if ($product->user_id != $user_id) {
+            //bubble left
+            $type_message = 1;
+        } else {
+            //bubble rigth
+            $type_message = 2;
+        }
+
+        //Si el que envia el mensaje tiene una conversacion con el dueño del producto
+        $user_topic = UserTopic::where("user_one", $product->user_id)->where("user_two", $buyer_id)->first();
+
+        if (!$user_topic) {
+            $conversation_relation = new UserTopic();
+            $conversation_relation->user_one = $product->user_id;
+            $conversation_relation->user_two = $buyer_id;
+            $conversation_relation->topic_id = uniqid();
+            $conversation_relation->pet_id = $product->id;
+
+            if ($conversation_relation->save()) {
+                /* invita a las 2 personas al grupo */
+                $tokenOwner = User::where("id", $product->user_id)->first();
+                $tokenBuyer = User::where("id", $buyer_id)->first();
+                $this->subscribeUser($tokenOwner, $conversation_relation->topic_id);
+                $this->subscribeUser($tokenBuyer, $conversation_relation->topic_id);
+
+            }
+
+        } else {
+
+        }
+
         $post_data = array(
             'to' => "/topics/news",
             'data' => array(
                 'chat_id' => "1",
                 'message_id' => "1",
                 'message' => "Hola mundo",
-                'type' => "1",
+                'type' => $type_message,
             )
         );
 
-
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
-            ->withData( $post_data )
+            ->withData($post_data)
             ->asJson()
             ->withHeader('Content-Type: application/json')
             ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
             ->post();
 
         echo json_encode($response);
+    }
+
+    private function subscribeUser($user_token, $conversation_uuid)
+    {
+        $response = Curl::to('https://iid.googleapis.com/iid/v1/' . $user_token . '/rel/topics/' . $conversation_uuid)
+            ->asJson()
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
+            ->post();
     }
 }
