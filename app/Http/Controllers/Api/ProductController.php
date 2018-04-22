@@ -148,7 +148,9 @@ class ProductController extends Controller
         }
 
         //Si el que envia el mensaje tiene una conversacion con el dueño del producto
-        $user_topic = UserTopic::where("user_one", $product->user_id)->where("user_two", $buyer_id)->first();
+        $user_topic = UserTopic::where("user_one", $product->user_id)
+            ->where("user_two", $buyer_id)
+            ->where("pet_id", $product->id)->first();
 
         if (!$user_topic) {
             $conversation_relation = new UserTopic();
@@ -163,12 +165,12 @@ class ProductController extends Controller
                 $tokenBuyer = User::where("id", $buyer_id)->first();
                 $this->subscribeUser($tokenOwner, $conversation_relation->topic_id);
                 $this->subscribeUser($tokenBuyer, $conversation_relation->topic_id);
-
             }
 
         } else {
-
+           // $user_topic->topic_id;
         }
+
 
         $post_data = array(
             'to' => "/topics/news",
