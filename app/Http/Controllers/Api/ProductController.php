@@ -130,7 +130,8 @@ class ProductController extends Controller
         // Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
             ->withData( array( 'foz' => 'baz' ) )
-            ->asJson()
+            ->withHeader('Content-Type: application/json')
+            ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
             ->post();
 
         echo json_encode($response);
