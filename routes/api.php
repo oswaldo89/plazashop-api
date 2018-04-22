@@ -17,5 +17,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 //url abierta al publico
 Route::get('/product_list/{total}', 'Api\ProductController@getList');
 
-Route::get('/sendMessage', 'Api\ProductController@sendMessage');
+Route::post('/sendMessage', 'Api\ProductController@sendMessage');
 
