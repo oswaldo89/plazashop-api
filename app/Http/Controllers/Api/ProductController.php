@@ -179,6 +179,7 @@ class ProductController extends Controller
                 'message_id' => "1",
                 'message' => "Hola mundo",
                 'type' => $type_message,
+                'pet_id' => $product->id
             )
         );
 
