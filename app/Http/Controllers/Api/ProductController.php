@@ -106,7 +106,7 @@ class ProductController extends Controller
     public function getList($total, $user_id)
     {
         Log::info('USER_ID' . $user_id);
-        if ($user_id != null) {
+        if ($user_id != 0) {
             $products = Product::where('activo', 1)
                 ->where("user_id", '!=', $user_id)
                 ->skip($total)->take(10)
