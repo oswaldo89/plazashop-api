@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Chat;
 use App\Product;
 use App\ProductsPhoto;
 use App\User;
@@ -167,17 +168,25 @@ class ProductController extends Controller
                 $this->subscribeUser($tokenOwner->firebase_token, $conversation_relation->topic_id);
                 $this->subscribeUser($tokenBuyer->firebase_token, $conversation_relation->topic_id);
 
-                $post_data = array(
-                    'to' => "/topics/" . $conversation_relation->topic_id,
-                    'data' => array(
-                        'chat_id' => "1",
-                        'message_id' => "1",
-                        'message' => $message,
-                        'type' => $type_message,
-                        'pet_id' => $product->id
-                    )
-                );
-                $response = $this->sendNotification($post_data);
+                $chat = new Chat();
+                $chat->chat_id = $conversation_relation->topic_id;
+                $chat->message = $message;
+                $chat->type = $type_message;
+                $chat->pet_id = $product->id;
+
+                if ($chat->save()) {
+                    $post_data = array(
+                        'to' => "/topics/" . $conversation_relation->topic_id,
+                        'data' => array(
+                            'chat_id' => "1",
+                            'message_id' => "1",
+                            'message' => $message,
+                            'type' => $type_message,
+                            'pet_id' => $product->id
+                        )
+                    );
+                    $response = $this->sendNotification($post_data);
+                }
             }
 
         } else {
