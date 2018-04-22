@@ -193,6 +193,7 @@ class ProductController extends Controller
 
         } else {
             $conversation = UserTopic::where("user_one", $product->user_id)->where("topic_id", $chat_id)->first();
+            echo json_encode($conversation);
 
             $chat = new Chat();
             $chat->chat_id = $conversation->topic_id;
