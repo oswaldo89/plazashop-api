@@ -135,9 +135,10 @@ class ProductController extends Controller
     public function sendMessage(Request $request)
     {
         $user_id = Auth::user()->id;
+        return 'termina';
         $buyer_id = $request->buyer_id; //78
         $product = Product::where("id", $request->pet_id)->first();
-        return 'termina';
+
 
         //si el dueño del producto es el que esta en session envia la burbuja a la derecha
         if ($product->user_id != $user_id) {
