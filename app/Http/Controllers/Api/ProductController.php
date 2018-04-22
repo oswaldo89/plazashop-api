@@ -190,7 +190,27 @@ class ProductController extends Controller
             }
 
         } else {
-            // $user_topic->topic_id;
+            $conversation = User::where("user_one", $product->user_id)->where("user_two", $buyer_id)->first();
+
+            $chat = new Chat();
+            $chat->chat_id = $conversation->topic_id;
+            $chat->message = $message;
+            $chat->type = $type_message;
+            $chat->pet_id = $product->id;
+
+            if ($chat->save()) {
+                $post_data = array(
+                    'to' => "/topics/" . $conversation->topic_id,
+                    'data' => array(
+                        'chat_id' => $conversation->topic_id,
+                        'message_id' => $chat->id,
+                        'message' => $message,
+                        'type' => $type_message,
+                        'pet_id' => $product->id
+                    )
+                );
+                $response = $this->sendNotification($post_data);
+            }
         }
 
 
