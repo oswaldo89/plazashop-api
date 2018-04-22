@@ -102,9 +102,9 @@ class ProductController extends Controller
     /**
      * Obtains pagination from the products
      **/
-    public function getList($total)
+    public function getList($total, $user_id)
     {
-        if (Auth::check()) {
+        if ($user_id != null) {
             $products = Product::where('activo', 1)
                 ->where("user_id", '!=', Auth::user()->id)
                 ->skip($total)->take(10)
@@ -112,7 +112,6 @@ class ProductController extends Controller
                 ->with('photos')->get();
         } else {
             $products = Product::where('activo', 1)
-                ->where("user_id", '!=', Auth::user()->id)
                 ->skip($total)->take(10)
                 ->orderBy('created_at', 'desc')
                 ->with('photos')->get();
