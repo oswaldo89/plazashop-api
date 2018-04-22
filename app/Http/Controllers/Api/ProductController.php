@@ -104,7 +104,7 @@ class ProductController extends Controller
      **/
     public function getList($total)
     {
-        if (Auth::user()) {
+        if (Auth::check()) {
             $products = Product::where('activo', 1)
                 ->where("user_id", '!=', Auth::user()->id)
                 ->skip($total)->take(10)
