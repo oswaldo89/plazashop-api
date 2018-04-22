@@ -203,7 +203,7 @@ class ProductController extends Controller
                         )
                     );
                     $this->sendNotification($post_data);
-                    echo $conversation_relation->topic_id;
+                    echo json_encode($chat);
                 }
             }
 
@@ -233,7 +233,7 @@ class ProductController extends Controller
                 );
 
                 $this->sendNotification($post_data);
-                echo $conversation->topic_id;
+                echo json_encode($chat);
             }
         }
     }
