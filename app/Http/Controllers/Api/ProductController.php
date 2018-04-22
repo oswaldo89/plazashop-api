@@ -193,7 +193,7 @@ class ProductController extends Controller
      */
     private function sendNotification($post_data)
     {
-        $response = Curl::to('https://fcm.googleapis.com/fcm/send')
+        return Curl::to('https://fcm.googleapis.com/fcm/send')
             ->withData($post_data)
             ->asJson()
             ->withHeader('Content-Type: application/json')
