@@ -105,7 +105,7 @@ class ProductController extends Controller
      **/
     public function getList($total, $user_id)
     {
-        Log::info('USER_ID'.$user_id);
+        Log::info('USER_ID' . $user_id);
         if ($user_id != null) {
             $products = Product::where('activo', 1)
                 ->where("user_id", '!=', $user_id)
@@ -153,6 +153,7 @@ class ProductController extends Controller
         $buyer_id = $request->buyer_id; //78
         $message = $request->message; //78
         $chat_id = $request->chat_id; //78
+        $uniq = $request->uniq; //78
         $product = Product::where("id", $request->pet_id)->first();
 
         //si el dueño del producto es el que esta en session envia la burbuja a la derecha
@@ -188,6 +189,7 @@ class ProductController extends Controller
                 $chat->message = $message;
                 $chat->type = $type_message;
                 $chat->pet_id = $product->id;
+                $chat->uniq = $uniq;
 
                 if ($chat->save()) {
                     $post_data = array(
@@ -216,6 +218,7 @@ class ProductController extends Controller
             $chat->message = $message;
             $chat->type = $type_message;
             $chat->pet_id = $product->id;
+            $chat->uniq = $uniq;
 
             if ($chat->save()) {
                 $post_data = array(

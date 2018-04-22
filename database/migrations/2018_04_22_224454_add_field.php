@@ -13,7 +13,7 @@ class AddField extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('chat', function (Blueprint $table) {
             $table->string('uniq')->default("");
         });
     }
