@@ -178,8 +178,8 @@ class ProductController extends Controller
                     $post_data = array(
                         'to' => "/topics/" . $conversation_relation->topic_id,
                         'data' => array(
-                            'chat_id' => "1",
-                            'message_id' => "1",
+                            'chat_id' => $conversation_relation->topic_id,
+                            'message_id' => $chat->message_id,
                             'message' => $message,
                             'type' => $type_message,
                             'pet_id' => $product->id
