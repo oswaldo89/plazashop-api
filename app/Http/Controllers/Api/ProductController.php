@@ -143,11 +143,11 @@ class ProductController extends Controller
 
         //si el dueño del producto es el que esta en session envia la burbuja a la derecha
         if ($product->user_id != $user_id) {
-            //bubble left
-            $type_message = 1;
-        } else {
             //bubble rigth
             $type_message = 2;
+        } else {
+            //bubble left
+            $type_message = 1;
         }
 
         //Si el que envia el mensaje tiene una conversacion con el dueño del producto
