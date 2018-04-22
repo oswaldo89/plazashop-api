@@ -112,6 +112,7 @@ class ProductController extends Controller
                 ->with('photos')->get();
         } else {
             $products = Product::where('activo', 1)
+                ->where("user_id", '!=', Auth::user()->id)
                 ->skip($total)->take(10)
                 ->orderBy('created_at', 'desc')
                 ->with('photos')->get();
