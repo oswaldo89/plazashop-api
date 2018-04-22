@@ -192,7 +192,10 @@ class ProductController extends Controller
             }
 
         } else {
-            $conversation = UserTopic::where("user_one", $product->user_id)->where("topic_id", $chat_id)->first();
+            $conversation = UserTopic::where("user_one", $product->user_id)
+                ->orWhere("user_two", $product->user_id)
+                ->where("topic_id", $chat_id)
+                ->first();
 
             $chat = new Chat();
             $chat->chat_id = $conversation->topic_id;
