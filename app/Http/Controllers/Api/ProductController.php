@@ -134,8 +134,9 @@ class ProductController extends Controller
      */
     public function sendMessage(Request $request)
     {
-        $user_id = Auth::user()->id;
         return 'termina';
+        $user_id = Auth::user()->id;
+
         $buyer_id = $request->buyer_id; //78
         $product = Product::where("id", $request->pet_id)->first();
 
