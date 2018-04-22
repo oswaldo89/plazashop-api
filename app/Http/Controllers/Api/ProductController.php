@@ -138,10 +138,9 @@ class ProductController extends Controller
             )
         );
 
-        echo \GuzzleHttp\json_encode($post_data);
 
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
-            ->withData( array( 'foz' => 'baz' ) )
+            ->withData( $post_data )
             ->withHeader('Content-Type: application/json')
             ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
             ->post();
