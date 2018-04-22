@@ -166,32 +166,39 @@ class ProductController extends Controller
                 $tokenBuyer = User::where("id", $buyer_id)->first();
                 $this->subscribeUser($tokenOwner, $conversation_relation->topic_id);
                 $this->subscribeUser($tokenBuyer, $conversation_relation->topic_id);
+
+                $post_data = array(
+                    'to' => "/topics/" . $conversation_relation->topic_id,
+                    'data' => array(
+                        'chat_id' => "1",
+                        'message_id' => "1",
+                        'message' => $message,
+                        'type' => $type_message,
+                        'pet_id' => $product->id
+                    )
+                );
+                $response = $this->sendNotification($post_data);
             }
 
         } else {
-           // $user_topic->topic_id;
+            // $user_topic->topic_id;
         }
 
 
-        $post_data = array(
-            'to' => "/topics/news",
-            'data' => array(
-                'chat_id' => "1",
-                'message_id' => "1",
-                'message' => $message,
-                'type' => $type_message,
-                'pet_id' => $product->id
-            )
-        );
+        echo json_encode($response);
+    }
 
+    /**
+     *
+     */
+    private function sendNotification($post_data)
+    {
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
             ->withData($post_data)
             ->asJson()
             ->withHeader('Content-Type: application/json')
             ->withHeader('Authorization: Key=AAAAEZ0_Zqc:APA91bFYBorBc7GJdzyj-Cp_3tY_UV4gklGUEJtnf0zp6J9KFDupcTohK81CzqOK6SfRpKVBp9ctpZx8Da0ibuBkJrfO7MKHcQzRLSdkzoy88TyVfnmVHc6z41AQ1jMFuMBYgURoMBrb')
             ->post();
-
-        echo json_encode($response);
     }
 
     private function subscribeUser($user_token, $conversation_uuid)
