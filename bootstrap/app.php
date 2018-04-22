@@ -25,7 +25,7 @@ $app = new Illuminate\Foundation\Application(
 | incoming requests to this application from both the web and CLI.
 |
 */
-
+class_alias('Ixudra\Curl\Facades\Curl', 'Curl');
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
     App\Http\Kernel::class
@@ -49,7 +49,23 @@ $app->singleton(
 | This script returns the application instance. The instance is given to
 | the calling script so we can separate the building of the instances
 | from the actual running of the application and sending responses.
+|F
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Register Service Providers
+|--------------------------------------------------------------------------
+|
+| Here we will register all of the application's service providers which
+| are used to bind services into the container. Service providers are
+| totally optional, so you are not required to uncomment this line.
 |
 */
+
+// $app->register('App\Providers\AppServiceProvider');
+
+// Package service providers
+$app->register(Ixudra\Curl\CurlServiceProvider::class);
 
 return $app;

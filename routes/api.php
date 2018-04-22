@@ -16,3 +16,10 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 //url abierta al publico
 Route::get('/product_list/{total}', 'Api\ProductController@getList');
+
+Route::post('/sendMessage', 'Api\ProductController@sendMessage');
+// Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
+$response = Curl::to('https://fcm.googleapis.com/fcm/send')
+    ->withData( array( 'foz' => 'baz' ) )
+    ->asJson()
+    ->post();

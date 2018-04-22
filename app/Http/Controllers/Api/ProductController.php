@@ -7,6 +7,7 @@ use App\ProductsPhoto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Ixudra\Curl\Facades\Curl;
 
 class ProductController extends Controller
 {
@@ -122,5 +123,14 @@ class ProductController extends Controller
     {
         $products = Product::where("user_id", $user_id)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
         return response()->json($products);
+    }
+
+    /* sendMessage */
+    public function  sendMessage(){
+        // Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
+        $response = Curl::to('https://fcm.googleapis.com/fcm/send')
+            ->withData( array( 'foz' => 'baz' ) )
+            ->asJson()
+            ->post();
     }
 }
