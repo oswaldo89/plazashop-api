@@ -128,7 +128,7 @@ class ProductController extends Controller
     /* sendMessage */
     public function  sendMessage(){
         // Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
-        $result = null;
+        $result = NULL;
         $result->to = "/topics/news";
         $result->data->chat_id = "1";
         $result->data->message_id = "1";
