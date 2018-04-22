@@ -128,6 +128,15 @@ class ProductController extends Controller
     /* sendMessage */
     public function  sendMessage(){
         // Send a POST request to: http://www.foo.com/bar with arguments 'foz' = 'baz' using JSON
+        $result = null;
+        $result->to = "/topics/news";
+        $result->data->chat_id = "1";
+        $result->data->message_id = "1";
+        $result->data->message = "Hola mundo";
+        $result->data->type = "1";
+
+        echo \GuzzleHttp\json_encode($result);
+
         $response = Curl::to('https://fcm.googleapis.com/fcm/send')
             ->withData( array( 'foz' => 'baz' ) )
             ->withHeader('Content-Type: application/json')
