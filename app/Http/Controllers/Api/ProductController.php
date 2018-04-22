@@ -138,6 +138,7 @@ class ProductController extends Controller
         $user_id = Auth::user()->id;
         $buyer_id = $request->buyer_id; //78
         $message = $request->message; //78
+        $chat_id = $request->chat_id; //78
         $product = Product::where("id", $request->pet_id)->first();
 
         //si el dueño del producto es el que esta en session envia la burbuja a la derecha
@@ -185,12 +186,13 @@ class ProductController extends Controller
                             'pet_id' => $product->id
                         )
                     );
-                    $response = $this->sendNotification($post_data);
+                    $this->sendNotification($post_data);
+                    echo json_encode($chat->id);
                 }
             }
 
         } else {
-            $conversation = User::where("user_one", $product->user_id)->where("user_two", $buyer_id)->first();
+            $conversation = UserTopic::where("user_one", $product->user_id)->where("chat_id", $chat_id)->first();
 
             $chat = new Chat();
             $chat->chat_id = $conversation->topic_id;
@@ -209,12 +211,11 @@ class ProductController extends Controller
                         'pet_id' => $product->id
                     )
                 );
-                $response = $this->sendNotification($post_data);
+
+                $this->sendNotification($post_data);
+                echo json_encode($chat->id);
             }
         }
-
-
-        echo json_encode($response);
     }
 
     /**
