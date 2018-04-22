@@ -164,8 +164,8 @@ class ProductController extends Controller
                 /* invita a las 2 personas al grupo */
                 $tokenOwner = User::where("id", $product->user_id)->first();
                 $tokenBuyer = User::where("id", $buyer_id)->first();
-                $this->subscribeUser($tokenOwner, $conversation_relation->topic_id);
-                $this->subscribeUser($tokenBuyer, $conversation_relation->topic_id);
+                $this->subscribeUser($tokenOwner->firebase_token, $conversation_relation->topic_id);
+                $this->subscribeUser($tokenBuyer->firebase_token, $conversation_relation->topic_id);
 
                 $post_data = array(
                     'to' => "/topics/" . $conversation_relation->topic_id,
