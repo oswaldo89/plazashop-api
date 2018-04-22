@@ -9,7 +9,7 @@ class CreateChat extends Migration
     public function up()
     {
         Schema::create('chat', function (Blueprint $table) {
-            $table->increments('message_id');
+            $table->increments('id');
             $table->string('chat_id');
             $table->string('message');
             $table->integer('type');
