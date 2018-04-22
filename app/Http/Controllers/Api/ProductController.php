@@ -132,5 +132,7 @@ class ProductController extends Controller
             ->withData( array( 'foz' => 'baz' ) )
             ->asJson()
             ->post();
+
+        echo json_encode($response);
     }
 }
