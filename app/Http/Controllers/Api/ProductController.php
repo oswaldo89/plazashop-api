@@ -187,13 +187,12 @@ class ProductController extends Controller
                         )
                     );
                     $this->sendNotification($post_data);
-                    echo json_encode($conversation_relation->topic_id);
+                    echo $conversation_relation->topic_id;
                 }
             }
 
         } else {
             $conversation = UserTopic::where("user_one", $product->user_id)->where("topic_id", $chat_id)->first();
-            echo json_encode($conversation);
 
             $chat = new Chat();
             $chat->chat_id = $conversation->topic_id;
@@ -214,7 +213,7 @@ class ProductController extends Controller
                 );
 
                 $this->sendNotification($post_data);
-                echo json_encode($conversation->topic_id);
+                echo $conversation->topic_id;
             }
         }
     }
