@@ -104,7 +104,12 @@ class ProductController extends Controller
      **/
     public function getList($total)
     {
-        $products = Product::where('activo', 1)->skip($total)->take(10)->orderBy('created_at', 'desc')->with('photos')->get();
+        $user_id = Auth::user()->id;
+        $products = Product::where('activo', 1)
+            ->where("user_id", "<>", $user_id)
+            ->skip($total)->take(10)
+            ->orderBy('created_at', 'desc')
+            ->with('photos')->get();
         return response()->json($products);
     }
 
