@@ -155,7 +155,7 @@ class ProductController extends Controller
             ->where("user_two", $buyer_id)
             ->where("pet_id", $product->id)->first();
 
-        if (!$user_topic) {
+        if (!$user_topic && $chat_id == "") {
             $conversation_relation = new UserTopic();
             $conversation_relation->user_one = $product->user_id;
             $conversation_relation->user_two = $buyer_id;
