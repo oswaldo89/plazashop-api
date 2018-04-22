@@ -108,7 +108,7 @@ class ProductController extends Controller
         Log::info('USER_ID'.$user_id);
         if ($user_id != null) {
             $products = Product::where('activo', 1)
-                ->where("user_id", '!=', Auth::user()->id)
+                ->where("user_id", '!=', $user_id)
                 ->skip($total)->take(10)
                 ->orderBy('created_at', 'desc')
                 ->with('photos')->get();
