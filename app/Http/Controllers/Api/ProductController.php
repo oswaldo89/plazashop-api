@@ -199,7 +199,8 @@ class ProductController extends Controller
                             'message_id' => $chat->id,
                             'message' => $message,
                             'type' => $type_message,
-                            'pet_id' => $product->id
+                            'pet_id' => $product->id,
+                            'uniq' => $chat->uniq
                         )
                     );
                     $this->sendNotification($post_data);
@@ -228,7 +229,8 @@ class ProductController extends Controller
                         'message_id' => $chat->id,
                         'message' => $message,
                         'type' => $type_message,
-                        'pet_id' => $product->id
+                        'pet_id' => $product->id,
+                        'uniq' => $chat->uniq
                     )
                 );
 
