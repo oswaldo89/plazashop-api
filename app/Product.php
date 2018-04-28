@@ -15,6 +15,9 @@ class Product extends Model
         'user_id',
         'uniq'
     ];
+    protected $casts = [
+        'categoriaId' => 'integer'
+    ];
 
     public function photos()
     {
