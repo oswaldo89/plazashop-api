@@ -200,7 +200,8 @@ class ProductController extends Controller
                             'type' => $type_message,
                             'pet_id' => $product->id,
                             'category_id' => $product->categoriaId,
-                            'uniq' => $uniq
+                            'uniq' => $uniq,
+                            'title' => $product->nombre
                         )
                     );
                     $this->sendNotification($post_data);
@@ -231,7 +232,8 @@ class ProductController extends Controller
                         'type' => $type_message,
                         'pet_id' => $product->id,
                         'category_id' => $product->categoriaId,
-                        'uniq' => $uniq
+                        'uniq' => $uniq,
+                        'title' => $product->nombre
                     )
                 );
 
