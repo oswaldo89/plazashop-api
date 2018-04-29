@@ -199,6 +199,7 @@ class ProductController extends Controller
                             'message' => $message,
                             'type' => $type_message,
                             'pet_id' => $product->id,
+                            'category_id' => $product->categoriaId,
                             'uniq' => $uniq
                         )
                     );
@@ -229,6 +230,7 @@ class ProductController extends Controller
                         'message' => $message,
                         'type' => $type_message,
                         'pet_id' => $product->id,
+                        'category_id' => $product->categoriaId,
                         'uniq' => $uniq
                     )
                 );
