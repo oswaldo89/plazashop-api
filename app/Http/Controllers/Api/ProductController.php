@@ -243,7 +243,7 @@ class ProductController extends Controller
                         'user_id' => $user_id
                     )
                 );
-                Log::info('Log message', $post_data);
+
                 $this->sendNotification($post_data);
                 echo json_encode($chat);
             }
