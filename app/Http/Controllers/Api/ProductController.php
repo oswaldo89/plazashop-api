@@ -204,6 +204,7 @@ class ProductController extends Controller
                             'title' => $product->nombre
                         )
                     );
+                    Log::info('Log message', $post_data);
                     $this->sendNotification($post_data);
                     echo json_encode($chat);
                 }
@@ -236,7 +237,7 @@ class ProductController extends Controller
                         'title' => $product->nombre
                     )
                 );
-
+                Log::info('Log message', $post_data);
                 $this->sendNotification($post_data);
                 echo json_encode($chat);
             }
