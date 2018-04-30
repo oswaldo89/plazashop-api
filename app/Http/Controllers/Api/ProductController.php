@@ -170,6 +170,7 @@ class ProductController extends Controller
             ->where("pet_id", $product->id)->first();
 
         if (!$user_topic && $chat_id == "") {
+            Log::info('Log message:: Lo guarda');
             $conversation_relation = new UserTopic();
             $conversation_relation->user_one = $product->user_id;
             $conversation_relation->user_two = $buyer_id;
@@ -214,6 +215,7 @@ class ProductController extends Controller
             }
 
         } else {
+            Log::info('Log message:: Le sigue');
             $conversation = UserTopic::where("user_one", $product->user_id)
                 ->orWhere("user_two", $product->user_id)
                 ->where("topic_id", $chat_id)
@@ -263,7 +265,6 @@ class ProductController extends Controller
 
     private function subscribeUser($user_token, $conversation_uuid)
     {
-        Log::info('SE SUSCRIBE');
         $response = Curl::to('https://iid.googleapis.com/iid/v1/' . $user_token . '/rel/topics/' . $conversation_uuid)
             ->asJson()
             ->withHeader('Content-Type: application/json')
