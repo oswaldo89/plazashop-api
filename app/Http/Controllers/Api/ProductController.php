@@ -203,7 +203,8 @@ class ProductController extends Controller
                             'pet_id' => $product->id,
                             'category_id' => $product->categoriaId,
                             'uniq' => $uniq,
-                            'title' => $product->nombre
+                            'title' => $product->nombre,
+                            'user_id' => $user_id
                         )
                     );
                     Log::info('Log message', $post_data);
@@ -236,7 +237,8 @@ class ProductController extends Controller
                         'pet_id' => $product->id,
                         'category_id' => $product->categoriaId,
                         'uniq' => $uniq,
-                        'title' => $product->nombre
+                        'title' => $product->nombre,
+                        'user_id' => $user_id
                     )
                 );
                 Log::info('Log message', $post_data);
