@@ -65,6 +65,7 @@ class ProductController extends Controller
         $product->telephone = strlen($request->telephone) > 0 ? $request->telephone : "";
         $product->descripcion = $request->descripcion;
         $product->activo = $request->activo;
+        $product->cuantity = $request->cuantity;
 
         if ($product->update()) {
 
@@ -142,10 +143,6 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    /* sendMessage */
-    /**
-     * @param Request $request
-     */
     public function sendMessage(Request $request)
     {
         $user_id = Auth::user()->id;
@@ -181,8 +178,8 @@ class ProductController extends Controller
                 /* invita a las 2 personas al grupo */
                 $tokenOwner = User::where("id", $product->user_id)->first();
                 $tokenBuyer = User::where("id", $buyer_id)->first();
-                Log::info('Log message:: owner'. $tokenOwner->name);
-                Log::info('Log message:: buyer'. $tokenBuyer->name);
+                Log::info('Log message:: owner' . $tokenOwner->name);
+                Log::info('Log message:: buyer' . $tokenBuyer->name);
                 $this->subscribeUser($tokenOwner->firebase_token, $conversation_relation->topic_id);
                 $this->subscribeUser($tokenBuyer->firebase_token, $conversation_relation->topic_id);
 
@@ -250,9 +247,6 @@ class ProductController extends Controller
         }
     }
 
-    /**
-     *
-     */
     private function sendNotification($post_data)
     {
         return Curl::to('https://fcm.googleapis.com/fcm/send')

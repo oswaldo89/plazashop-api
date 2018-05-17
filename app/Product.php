@@ -13,10 +13,12 @@ class Product extends Model
         'local',
         'descripcion',
         'user_id',
-        'uniq'
+        'uniq',
+        'cuantity'
     ];
     protected $casts = [
-        'categoriaId' => 'integer'
+        'categoriaId' => 'integer',
+        'cuantity' => 'integer'
     ];
 
     public function photos()
