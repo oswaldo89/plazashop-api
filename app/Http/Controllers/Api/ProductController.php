@@ -146,28 +146,24 @@ class ProductController extends Controller
     public function sendMessage(Request $request)
     {
         $user_id = Auth::user()->id;
-        $buyer_id = $request->buyer_id; //78
-        $message = $request->message; //78
-        $chat_id = $request->chat_id; //78
-        $uniq = $request->uniq; //78
+        $buyer_id = $request->buyer_id;
+        $message = $request->message;
+        $chat_id = $request->chat_id;
+        $uniq = $request->uniq;
         $product = Product::where("id", $request->pet_id)->first();
 
         //si el dueño del producto es el que esta en session envia la burbuja a la derecha
         if ($product->user_id != $user_id) {
-            //bubble rigth
             $type_message = 2;
         } else {
-            //bubble left
             $type_message = 1;
         }
 
         //Si el que envia el mensaje tiene una conversacion con el dueño del producto
-        $user_topic = UserTopic::where("user_one", $product->user_id)
-            ->where("user_two", $buyer_id)
-            ->where("pet_id", $product->id)->first();
+        $user_topic = UserTopic::where("user_one", $product->user_id)->where("user_two", $buyer_id)->where("pet_id", $product->id)->first();
 
         if (!$user_topic && $chat_id == "") {
-            Log::info('Log message:: Lo guarda');
+
             $conversation_relation = new UserTopic();
             $conversation_relation->user_one = $product->user_id;
             $conversation_relation->user_two = $buyer_id;
@@ -178,8 +174,6 @@ class ProductController extends Controller
                 /* invita a las 2 personas al grupo */
                 $tokenOwner = User::where("id", $product->user_id)->first();
                 $tokenBuyer = User::where("id", $buyer_id)->first();
-                Log::info('Log message:: owner' . $tokenOwner->name);
-                Log::info('Log message:: buyer' . $tokenBuyer->name);
                 $this->subscribeUser($tokenOwner->firebase_token, $conversation_relation->topic_id);
                 $this->subscribeUser($tokenBuyer->firebase_token, $conversation_relation->topic_id);
 
@@ -189,6 +183,8 @@ class ProductController extends Controller
                 $chat->type = $type_message;
                 $chat->pet_id = $product->id;
                 $chat->uniq = $uniq;
+
+
 
                 if ($chat->save()) {
                     $post_data = array(
@@ -205,18 +201,15 @@ class ProductController extends Controller
                             'user_id' => $user_id
                         )
                     );
-                    Log::info('Log message', $post_data);
+                    Log::info('CHAT NUEVO:' . $conversation_relation->topic_id);
                     $this->sendNotification($post_data);
                     echo json_encode($chat);
                 }
             }
 
         } else {
-            Log::info('Log message:: Le sigue');
-            $conversation = UserTopic::where("user_one", $product->user_id)
-                ->orWhere("user_two", $product->user_id)
-                ->where("topic_id", $chat_id)
-                ->first();
+            //$conversation = UserTopic::where("user_one", $product->user_id)->orWhere("user_two", $product->user_id)->where("topic_id", $chat_id)->first();
+            $conversation = UserTopic::where("topic_id", $chat_id)->first();
 
             $chat = new Chat();
             $chat->chat_id = $conversation->topic_id;
@@ -240,6 +233,8 @@ class ProductController extends Controller
                         'user_id' => $user_id
                     )
                 );
+
+                Log::info('CHAT EXISTENTE:' . $conversation->topic_id);
 
                 $this->sendNotification($post_data);
                 echo json_encode($chat);
