@@ -185,7 +185,6 @@ class ProductController extends Controller
                 $chat->uniq = $uniq;
 
 
-
                 if ($chat->save()) {
                     $post_data = array(
                         'to' => "/topics/" . $conversation_relation->topic_id,
@@ -240,6 +239,12 @@ class ProductController extends Controller
                 echo json_encode($chat);
             }
         }
+    }
+
+    public function deleteMessage(Request $request)
+    {
+        $topic = UserTopic::where("topic_id", $request->topic_id)->where("pet_id", $request->pet_id)->first();
+        $topic->delete();
     }
 
     private function sendNotification($post_data)
