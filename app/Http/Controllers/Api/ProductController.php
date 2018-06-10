@@ -26,6 +26,7 @@ class ProductController extends Controller
         $product = new Product($request->all());
         $product->telephone = strlen($request->telephone) > 0 ? $request->telephone : "";
         $product->user_id = Auth::user()->id;
+        $product->validate = false;
 
         if ($product->save()) {
 
@@ -58,6 +59,7 @@ class ProductController extends Controller
     public function updateProduct(Request $request)
     {
         $product = Product::find($request->id);
+        $product->validate = false;
         $product->nombre = $request->nombre;
         $product->precio = $request->precio;
         $product->categoriaId = $request->categoriaId;
