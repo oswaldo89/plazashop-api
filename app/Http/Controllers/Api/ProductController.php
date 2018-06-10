@@ -120,11 +120,13 @@ class ProductController extends Controller
         if ($user_id != 0) {
             $products = Product::where('activo', 1)
                 ->where("user_id", '!=', $user_id)
+                ->where("validate", true)
                 ->skip($total)->take(10)
                 ->orderBy('created_at', 'desc')
                 ->with('photos')->get();
         } else {
             $products = Product::where('activo', 1)
+                ->where("validate", true)
                 ->skip($total)->take(10)
                 ->orderBy('created_at', 'desc')
                 ->with('photos')->get();
