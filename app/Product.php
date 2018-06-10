@@ -14,8 +14,15 @@ class Product extends Model
         'descripcion',
         'user_id',
         'uniq',
-        'cuantity'
+        'cuantity',
+        'latitude',
+        'longitude',
+        'Pais',
+        'Estado',
+        'Municipio',
+        'Colonia'
     ];
+
     protected $casts = [
         'categoriaId' => 'integer',
         'cuantity' => 'integer'
