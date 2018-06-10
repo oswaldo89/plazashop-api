@@ -67,6 +67,13 @@ class ProductController extends Controller
         $product->activo = $request->activo;
         $product->cuantity = $request->cuantity;
 
+        $product->latitude = $request->latitude;
+        $product->longitude = $request->longitude;
+        $product->Pais = $request->Pais;
+        $product->Estado = $request->Estado;
+        $product->Municipio = $request->Municipio;
+        $product->Colonia = $request->Colonia;
+
         if ($product->update()) {
 
             //Guarda imagenes
