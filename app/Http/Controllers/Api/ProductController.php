@@ -73,6 +73,8 @@ class ProductController extends Controller
         $product->Estado = $request->Estado;
         $product->Municipio = $request->Municipio;
         $product->Colonia = $request->Colonia;
+        $product->isAdoption = $request->isAdoption;
+
 
         if ($product->update()) {
 

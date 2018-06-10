@@ -20,7 +20,8 @@ class Product extends Model
         'Pais',
         'Estado',
         'Municipio',
-        'Colonia'
+        'Colonia',
+        'isAdoption'
     ];
 
     protected $casts = [
