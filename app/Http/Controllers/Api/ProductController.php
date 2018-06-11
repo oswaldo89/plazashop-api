@@ -42,7 +42,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Agregado correctamente.';
-            Slack::send("Nuevo masacota agregada: " . "\n\n" . "*Nombre:* ```" . json_encode($product) . "```" );
+            Slack::send("Nuevo masacota agregada: " . "\n\n" . "*Nombre:* ```pre```" . json_encode($product) . "```pre```" );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo guardar.';
