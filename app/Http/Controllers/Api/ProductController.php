@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Ixudra\Curl\Facades\Curl;
+use Slack;
 
 class ProductController extends Controller
 {
@@ -41,6 +42,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Agregado correctamente.';
+            Slack::send('Nuevo masacota agregada: ' . '\n' . 'Nombre: ' . $product->nombre . '\n' . 'Descripcion: ' . $product->descripcion );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo guardar.';
@@ -93,6 +95,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Modificado correctamente.';
+            Slack::send('Mascota modificada: ' . '\n' . 'Nombre: ' . $product->nombre . '\n' . 'Descripcion: ' . $product->descripcion );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo modificar.';
