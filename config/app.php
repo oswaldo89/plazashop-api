@@ -178,6 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Laravel\Passport\PassportServiceProvider::class,
         Ixudra\Curl\CurlServiceProvider::class,
+        jeremykenedy\Slack\Laravel\ServiceProvider::class,
 
     ],
 
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Curl'          => Ixudra\Curl\Facades\Curl::class,
+        'Slack' => jeremykenedy\Slack\Laravel\Facade::class,
 
     ],
 

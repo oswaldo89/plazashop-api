@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da217ce2e3d6b8601645735ce746136f",
-    "content-hash": "9e77dae4193faec89c88f6e485401ec1",
+    "hash": "dd2a51a1ca33ff985e02cd197a55d963",
+    "content-hash": "09821ec83ba7e0e0df2effe19612abef",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -749,6 +749,115 @@
                 }
             ],
             "time": "2015-04-20 18:58:01"
+        },
+        {
+            "name": "jeremykenedy/slack",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/slack.git",
+                "reference": "b862ea0f65585cec3ffe065296f0de56afd61763"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/slack/zipball/b862ea0f65585cec3ffe065296f0de56afd61763",
+                "reference": "b862ea0f65585cec3ffe065296f0de56afd61763",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "~6.0|~5.0|~4.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "4.2.*"
+            },
+            "suggest": {
+                "jeremykenedy/slack-laravel": "Required for Laravel support",
+                "nexylan/slack-bundle": "Required for Symfony bundle support"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\Slack\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "maknz",
+                    "email": "github@mak.geek.nz"
+                },
+                {
+                    "name": "jeremykenedy",
+                    "email": "jeremykenedy@gmail.com"
+                }
+            ],
+            "description": "A simple PHP package for sending messages to Slack.",
+            "keywords": [
+                "laravel",
+                "slack"
+            ],
+            "time": "2017-07-21 17:13:29"
+        },
+        {
+            "name": "jeremykenedy/slack-laravel",
+            "version": "v2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jeremykenedy/slack-laravel.git",
+                "reference": "2d974cbccb7ea562a604a296da6c09ea662ef0e8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jeremykenedy/slack-laravel/zipball/2d974cbccb7ea562a604a296da6c09ea662ef0e8",
+                "reference": "2d974cbccb7ea562a604a296da6c09ea662ef0e8",
+                "shasum": ""
+            },
+            "require": {
+                "jeremykenedy/slack": "~2.0",
+                "php": ">=5.6.4"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "jeremykenedy\\Slack\\Laravel\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Slack": "jeremykenedy\\Slack\\Laravel\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "jeremykenedy\\Slack\\Laravel\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "maknz",
+                    "email": "github@mak.geek.nz"
+                },
+                {
+                    "name": "jeremykenedy",
+                    "email": "jeremykenedy@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 integration for the jeremykenedy/slack package, including facades and service providers.",
+            "keywords": [
+                "laravel",
+                "slack"
+            ],
+            "time": "2017-09-02 09:49:29"
         },
         {
             "name": "laravel/framework",
