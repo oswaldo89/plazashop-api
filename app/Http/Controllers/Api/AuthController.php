@@ -31,7 +31,7 @@ class AuthController extends Controller
         $token = $user->createToken('MyApp')->accessToken;
 
         //Mail::to($user['email'])->send(new WelcomeMail($user));
-        Slack::send("Usuario nuevo: " . "\n\n" . "*Nombre:* " . $request->get('email') );
+        Slack::send("*Usuario nuevo:* " . "\n\n" . "```" . response()->json($user,200, array(), JSON_PRETTY_PRINT) . "```" );
 
         return response()->json([
             'token' => $token,
@@ -50,7 +50,7 @@ class AuthController extends Controller
 
             $token = $user->createToken('MyApp')->accessToken;
 
-            Slack::send("Usuario ingreso a la app: " . "\n\n" . "*Nombre:* " . $user->email );
+            Slack::send("*Ingreso a la app:* " . "\n\n" . "```" . response()->json($user,200, array(), JSON_PRETTY_PRINT) . "```" );
             return response()->json(['token' => $token, 'user' => $user], 200);
 
         } else {
