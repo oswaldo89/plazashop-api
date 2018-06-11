@@ -42,7 +42,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Agregado correctamente.';
-            Slack::send("Nuevo masacota agregada: " . "\n\n" . "*Nombre:* " . $product->nombre . "\n" . "*Descripcion:* " . $product->descripcion );
+            Slack::send("Nuevo masacota agregada: " . "\n\n" . "*Nombre:* " . json_encode($product) );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo guardar.';
@@ -95,7 +95,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Modificado correctamente.';
-            Slack::send("Mascota modificada: " . "\n\n" . "*Nombre:* " . $product->nombre . "\n" . "*Descripcion:* " . $product->descripcion );
+            Slack::send("Mascota modificada: " . "\n\n" . "*Nombre:* " . json_encode($product) );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo modificar.';
