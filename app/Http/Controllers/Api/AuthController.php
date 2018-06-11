@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Validator;
 use App\Http\Controllers\Controller;
+use Slack;
 
 class AuthController extends Controller
 {
@@ -30,6 +31,7 @@ class AuthController extends Controller
         $token = $user->createToken('MyApp')->accessToken;
 
         //Mail::to($user['email'])->send(new WelcomeMail($user));
+        Slack::send("Usuario nuevo: " . "\n\n" . "*Nombre:* " . $request->get('email') );
 
         return response()->json([
             'token' => $token,
@@ -47,6 +49,8 @@ class AuthController extends Controller
             $user = Auth::user();
 
             $token = $user->createToken('MyApp')->accessToken;
+
+            Slack::send("Usuario ingreso a la app: " . "\n\n" . "*Nombre:* " . $user->email );
             return response()->json(['token' => $token, 'user' => $user], 200);
 
         } else {
