@@ -95,7 +95,7 @@ class ProductController extends Controller
 
             $result['status'] = true;
             $result['message'] = 'Modificado correctamente.';
-            Slack::send("Mascota modificada: " . "\n\n" . "*Nombre:*  ```" . response()->json($product,JSON_PRETTY_PRINT) . "```" );
+            Slack::send("Mascota modificada: " . "\n\n" . "*Nombre:*  ```" . response()->json($product,200, array(), JSON_PRETTY_PRINT) . "```" );
         } else {
             $result['status'] = false;
             $result['message'] = 'Ocurrio un error, no se pudo modificar.';
