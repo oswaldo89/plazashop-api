@@ -21,7 +21,8 @@ class Product extends Model
         'Estado',
         'Municipio',
         'Colonia',
-        'isAdoption'
+        'isAdoption',
+        'enableChat'
     ];
 
     protected $casts = [

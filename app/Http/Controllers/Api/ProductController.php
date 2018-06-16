@@ -78,6 +78,8 @@ class ProductController extends Controller
         $product->Municipio = $request->Municipio;
         $product->Colonia = $request->Colonia;
         $product->isAdoption = $request->isAdoption;
+        $product->enableChat = $request->enableChat;
+
 
 
         if ($product->update()) {
